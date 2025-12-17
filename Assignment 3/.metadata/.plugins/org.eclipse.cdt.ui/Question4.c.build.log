@@ -1,0 +1,10 @@
+22:14:36 **** Incremental Build of configuration Debug for project Question4.c ****
+make -j4 all 
+arm-none-eabi-size  Question4.c.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1112	      4	   1564	   2680	    a78	Question4.c.elf
+Finished building: default.size.stdout
+ 
+
+22:14:37 Build Finished. 0 errors, 0 warnings. (took 338ms)
+

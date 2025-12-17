@@ -1,0 +1,21 @@
+22:43:37 **** Incremental Build of configuration Debug for project Question6.c ****
+make -j4 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "Question6.c.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\hp\Desktop\Sunbeam Data\ARM_94152_Vaishnavi\Assignment 3\Question6.c\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Question6.c.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Question6.c.elf
+ 
+arm-none-eabi-size  Question6.c.elf 
+arm-none-eabi-objdump -h -S Question6.c.elf  > "Question6.c.list"
+   text	   data	    bss	    dec	    hex	filename
+   1040	      4	   1564	   2608	    a30	Question6.c.elf
+Finished building: default.size.stdout
+ 
+Finished building: Question6.c.list
+ 
+22:44:04 **** Incremental Build of configuration Debug for project Question6.c ****
+make -j4 all 
+arm-none-eabi-size  Question6.c.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1040	      4	   1564	   2608	    a30	Question6.c.elf
+Finished building: default.size.stdout
+ 
