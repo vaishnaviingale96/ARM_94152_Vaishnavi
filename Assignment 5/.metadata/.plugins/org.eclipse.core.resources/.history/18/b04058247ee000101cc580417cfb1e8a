@@ -1,0 +1,47 @@
+/*
+ * ext_intr.c
+ *
+ *  Created on: Dec 18, 2025
+ *      Author: kiran_z6dopa8
+ */
+
+
+#include "ext_intr.h"
+
+/* ✅ ONLY definition of the flag */
+volatile int ext_flag = 0;
+
+void extint_init(void)
+{
+    /* Enable GPIOA clock */
+    RCC->AHB1ENR |= BV(0);
+
+    /* PA0 as input */
+    GPIOA->MODER &= ~(BV(0) | BV(1));
+
+    /* No pull-up / pull-down */
+    GPIOA->PUPDR &= ~(BV(0) | BV(1));
+
+    /* Map EXTI0 to PA0 */
+    SYSCFG->EXTICR[0] &= ~(BV(0) | BV(1) | BV(2) | BV(3));
+
+    /* Unmask EXTI0 */
+    EXTI->IMR |= BV(0);
+
+    /* Falling edge trigger (button release) */
+    EXTI->RTSR &= ~BV(0);
+    EXTI->FTSR |=  BV(0);
+
+    /* Enable EXTI0 interrupt in NVIC */
+    NVIC_EnableIRQ(EXTI0_IRQn);
+}
+
+/* EXTI0 Interrupt Service Routine */
+void EXTI0_IRQHandler(void)
+{
+    /* Clear pending interrupt */
+    EXTI->PR |= BV(0);
+
+    /* Set software flag ONLY */
+    ext_flag = 1;
+}
