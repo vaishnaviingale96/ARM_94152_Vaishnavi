@@ -129,9 +129,9 @@ int main(void)
          HAL_UART_Transmit(&huart2, (uint8_t*)msg2, strlen(msg2), HAL_MAX_DELAY);
          HAL_UART_Transmit(&huart2, (uint8_t*)rx_buffer, strlen(rx_buffer), HAL_MAX_DELAY);
 
-         // uint8_t len = strlen(msg);
-          //sprintf(msg, "len = %d\r\n", len);
-         // HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+          uint8_t len = strlen(msg);
+          sprintf(msg, "len = %d\r\n", len);
+          HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
 
           char msg3[] = "\r\n";
           HAL_UART_Transmit(&huart2, (uint8_t*)msg3, strlen(msg3), HAL_MAX_DELAY);
