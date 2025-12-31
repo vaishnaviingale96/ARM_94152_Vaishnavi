@@ -1,0 +1,9 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MQ2_LCD_Buzzer Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Mq2_LCD_Led1 Debug (1),org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Mq2_LCD_Led1 Debug (2),org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Mq2_LCD_Led1 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MQ2 Debug,org.eclipse.launchbar.core.descriptorType.default\:Project Debug,org.eclipse.launchbar.core.descriptorType.default\:Project Debug (1),org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug,org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug (1),org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug (2),org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug (3),org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug (4),org.eclipse.launchbar.core.descriptorType.default\:Sunbeam_project Debug (5)
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MQ2\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:MQ2\ Debug/activeLaunchTarget=null\:---
+org.eclipse.launchbar.core.descriptorType.default\:Mq2_LCD_Led1\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:Project\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

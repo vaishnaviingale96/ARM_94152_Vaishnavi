@@ -1,0 +1,97 @@
+#include "lcd.h"
+#include "stm32f4xx_hal.h"
+#include <string.h>
+
+/* I2C handle pointer */
+static I2C_HandleTypeDef *lcd_i2c = NULL;
+
+/* LCD I2C address */
+static uint8_t lcd_i2c_addr = 0;
+
+/* Send a nibble with flags via I2C */
+HAL_StatusTypeDef lcd_i2c_send_nibble(uint8_t nibble_with_flags)
+{
+    uint8_t data[2];
+    data[0] = nibble_with_flags | LCD_EN; // Enable HIGH
+    data[1] = nibble_with_flags;          // Enable LOW (latch)
+    return HAL_I2C_Master_Transmit(lcd_i2c, lcd_i2c_addr, data, 2, HAL_MAX_DELAY);
+}
+
+/* Send command/data in 4-bit mode */
+static void lcd_send(uint8_t value, uint8_t mode)
+{
+    uint8_t high_nibble = value & 0xF0;
+    uint8_t low_nibble  = (value << 4) & 0xF0;
+
+    lcd_i2c_send_nibble(high_nibble | mode | LCD_BK_LIGHT);
+    lcd_i2c_send_nibble(low_nibble  | mode | LCD_BK_LIGHT);
+}
+
+/* Send command */
+static void lcd_cmd(uint8_t cmd)
+{
+    lcd_send(cmd, 0x00);
+    HAL_Delay(2);
+}
+
+/* Send data */
+static void lcd_data(uint8_t data)
+{
+    lcd_send(data, LCD_RS);
+}
+
+/* Initialize LCD */
+bool lcd16x2_i2c_init(I2C_HandleTypeDef *pI2cHandle)
+{
+    lcd_i2c = pI2cHandle;
+    HAL_Delay(100);   // Power-up delay
+
+    /* Detect LCD I2C address */
+    if (HAL_I2C_IsDeviceReady(lcd_i2c, LCD_I2C_SLAVE_ADDRESS_0, 3, 100) == HAL_OK)
+        lcd_i2c_addr = LCD_I2C_SLAVE_ADDRESS_0;
+    else if (HAL_I2C_IsDeviceReady(lcd_i2c, LCD_I2C_SLAVE_ADDRESS_1, 3, 100) == HAL_OK)
+        lcd_i2c_addr = LCD_I2C_SLAVE_ADDRESS_1;
+    else
+        return false; // LCD not found
+
+    /* Initialization sequence */
+    lcd_cmd(0x30);
+    HAL_Delay(5);
+    lcd_cmd(0x30);
+    HAL_Delay(1);
+    lcd_cmd(0x30);
+    HAL_Delay(1);
+    lcd_cmd(0x20); // 4-bit mode
+    HAL_Delay(1);
+    lcd_cmd(LCD_FUNCTIONSET | LCD_FUNCTION_N);
+    lcd_cmd(LCD_DISPLAYCONTROL);
+    lcd_cmd(LCD_CLEARDISPLAY);
+    HAL_Delay(2);
+    lcd_cmd(LCD_ENTRYMODESET | LCD_ENTRY_ID);
+    lcd_cmd(LCD_DISPLAYCONTROL | LCD_DISPLAY_D);
+
+    return true;
+}
+
+/* Clear LCD */
+void lcd16x2_i2c_clear(void)
+{
+    lcd_cmd(LCD_CLEARDISPLAY);
+    HAL_Delay(2);
+}
+
+/* Set cursor */
+void lcd16x2_i2c_setCursor(uint8_t row, uint8_t col)
+{
+    uint8_t address;
+    if (col > 15) col = 15;
+    address = (row == 0) ? LCD_SETDDRAMADDR + col : LCD_SETDDRAMADDR + 0x40 + col;
+    lcd_cmd(address);
+}
+
+/* Print string on LCD */
+void lcd16x2_i2c_printf(const char* str)
+{
+    while (*str)
+        lcd_data((uint8_t)*str++);
+}

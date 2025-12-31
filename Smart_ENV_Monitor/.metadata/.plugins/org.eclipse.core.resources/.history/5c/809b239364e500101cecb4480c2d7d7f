@@ -1,0 +1,23 @@
+#include "mq2.h"
+
+static ADC_HandleTypeDef *mq2_adc;
+
+void MQ2_Init(ADC_HandleTypeDef *hadc)
+{
+    mq2_adc = hadc;
+}
+
+uint32_t MQ2_Read(void)
+{
+    uint32_t sum = 0;
+
+    for (int i = 0; i < 10; i++)
+    {
+        HAL_ADC_Start(mq2_adc);
+        HAL_ADC_PollForConversion(mq2_adc, HAL_MAX_DELAY);
+        sum += HAL_ADC_GetValue(mq2_adc);
+        HAL_ADC_Stop(mq2_adc);
+        HAL_Delay(5);
+    }
+    return (sum / 10);
+}

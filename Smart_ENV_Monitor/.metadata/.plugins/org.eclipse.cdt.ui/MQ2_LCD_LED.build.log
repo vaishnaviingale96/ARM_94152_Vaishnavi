@@ -1,0 +1,52 @@
+14:37:48 **** Incremental Build of configuration Debug for project MQ2_LCD_LED ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:118:11: warning: implicit declaration of function 'LCD_Clear' [-Wimplicit-function-declaration]
+  118 |           LCD_Clear();
+      |           ^~~~~~~~~
+../Core/Src/main.c:120:11: warning: implicit declaration of function 'LCD_SetCursor' [-Wimplicit-function-declaration]
+  120 |           LCD_SetCursor(0, 0);
+      |           ^~~~~~~~~~~~~
+../Core/Src/main.c:122:11: warning: implicit declaration of function 'LCD_Print' [-Wimplicit-function-declaration]
+  122 |           LCD_Print(line);
+      |           ^~~~~~~~~
+../Core/Src/main.c:209:13: error: invalid storage class for function 'MX_GPIO_Init'
+  209 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'MX_GPIO_Init':
+../Core/Src/main.c:215:27: error: 'LED_BLUE' undeclared (first use in this function)
+  215 |     GPIO_InitStruct.Pin = LED_BLUE | LED_GREEN | LED_ORANGE | LED_RED;
+      |                           ^~~~~~~~
+../Core/Src/main.c:215:27: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:215:38: error: 'LED_GREEN' undeclared (first use in this function)
+  215 |     GPIO_InitStruct.Pin = LED_BLUE | LED_GREEN | LED_ORANGE | LED_RED;
+      |                                      ^~~~~~~~~
+../Core/Src/main.c:215:50: error: 'LED_ORANGE' undeclared (first use in this function)
+  215 |     GPIO_InitStruct.Pin = LED_BLUE | LED_GREEN | LED_ORANGE | LED_RED;
+      |                                                  ^~~~~~~~~~
+../Core/Src/main.c:215:63: error: 'LED_RED' undeclared (first use in this function)
+  215 |     GPIO_InitStruct.Pin = LED_BLUE | LED_GREEN | LED_ORANGE | LED_RED;
+      |                                                               ^~~~~~~
+../Core/Src/main.c:220:19: error: 'LED_PORT' undeclared (first use in this function)
+  220 |     HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+      |                   ^~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:225:3: error: 'sConfig' undeclared (first use in this function)
+  225 |   sConfig.Channel = ADC_CHANNEL_0;
+      |   ^~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:61:13: warning: 'MX_GPIO_Init' used but never defined
+   61 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:209:13: warning: 'MX_GPIO_Init' defined but not used [-Wunused-function]
+  209 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:162:6: warning: 'SystemClock_Config' defined but not used [-Wunused-function]
+  162 | void SystemClock_Config(void)
+      |      ^~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+
+14:37:49 Build Failed. 8 errors, 6 warnings. (took 736ms)
+

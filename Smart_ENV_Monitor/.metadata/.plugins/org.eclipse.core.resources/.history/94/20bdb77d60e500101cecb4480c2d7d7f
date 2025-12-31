@@ -1,0 +1,15 @@
+/*
+ * Mq2.h
+ *
+ *  Created on: Dec 30, 2025
+ *      Author: hp
+ */
+
+#ifndef INC_MQ2_H_
+#define INC_MQ2_H_
+
+void MQ2_Init(ADC_HandleTypeDef *hadc);
+uint32_t MQ2_Read(void);
+
+
+#endif /* INC_MQ2_H_ */
